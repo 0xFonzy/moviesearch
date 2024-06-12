@@ -1,5 +1,5 @@
 'use client';
-import { ChangeEvent, useCallback, useContext, useEffect, useMemo } from 'react';
+import { ChangeEvent, useCallback, useContext, useEffect } from 'react';
 import Image from 'next/image';
 import { SearchContext } from '../context/SearchContext';
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input, Navbar as Nav, NavbarBrand, NavbarContent } from '@nextui-org/react';
@@ -17,6 +17,12 @@ export default function Navbar() {
     setQuery(value);
     debouncedSearch(value);
   }, [setQuery, debouncedSearch]);
+
+  useEffect(() => {
+    return () => {
+      debouncedSearch.cancel();
+    }
+  }, [debouncedSearch])
 
   return (
     <Nav isBlurred maxWidth='full'>
