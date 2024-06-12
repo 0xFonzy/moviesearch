@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Movie } from '@/models/movie';
+import { Checkbox } from '@nextui-org/react';
+import dayjs from 'dayjs';
 
 type MovieCardProps = {
   movie: Movie;
@@ -27,16 +29,11 @@ export default function MovieCard({ movie, isOwned, toggleOwnership }: MovieCard
         />
       </div>
       {hover && (
-        <div className="absolute inset-0 bg-black bg-opacity-75 p-4 flex flex-col justify-start items-center overflow-y-auto">
-          <h2 className="text-lg font-semibold mb-2">{movie.title}</h2>
-          <p className="text-sm text-gray-400 mb-2">Release Date: {movie.release_date}</p>
-          <p className="text-sm">{movie.overview}</p>
-          <button
-            onClick={() => toggleOwnership(movie.id)}
-            className={`mt-4 ${isOwned ? 'text-green-500' : 'text-red-500'} hover:underline`}
-          >
-            {isOwned ? 'Unmark as Owned' : 'Mark as Owned'}
-          </button>
+        <div className="absolute inset-0 bg-black bg-opacity-75 p-4 flex flex-col justify-start items-center gap-2 overflow-y-auto">
+          <h2 className="text-lg text-center font-semibold mb-2">{movie.title}</h2>
+          <p className="text-sm text-gray-400 mb-2">Released: {dayjs(movie.release_date).format('MMMM D, YYYY')}</p>
+          <p className="text-sm">{movie.overview || 'No movie description.'}</p>
+          <Checkbox className="pt-8" isSelected={isOwned} onValueChange={() => toggleOwnership(movie.id)}>Movie Owned</Checkbox>
         </div>
       )}
     </div>
