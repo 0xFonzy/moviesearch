@@ -1,19 +1,22 @@
 'use client';
-import { ChangeEvent, useCallback, useContext } from 'react';
+import { ChangeEvent, useCallback, useContext, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { SearchContext } from '../context/SearchContext';
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input, Navbar as Nav, NavbarBrand, NavbarContent } from '@nextui-org/react';
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
+import { debounce } from 'lodash';
 
 export default function Navbar() {
   const { query, setQuery, handleSearch } = useContext(SearchContext);
 
+  const debouncedSearch = useCallback(debounce(handleSearch, 500), []);
+
   const handleMovieSearch = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
     setQuery(value);
-    handleSearch(value);
-  }, [handleSearch, setQuery]);
+    debouncedSearch(value);
+  }, [setQuery, debouncedSearch]);
 
   return (
     <Nav isBlurred maxWidth='full'>
