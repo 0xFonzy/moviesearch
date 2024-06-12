@@ -1,5 +1,15 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Background
+
+The movie search app enables searching for movies using The Movie Database API (TMDB).
+Supported features:
+
+- Search for movie information from the TMDB API
+- Users can mark/unmark movies they own that they searched for
+- Search results display the movie title, release date, and overview
+- Results are paginated and display 10 results at a time
+
 ## Getting Started
 
 Create .env file and set environment variables
