@@ -1,6 +1,7 @@
-"use client";
+'use client';
 import { useState, FormEvent } from 'react';
 import { searchMovies } from '../lib/tmbd';
+import MovieCard from '../components/MovieCard';
 import { Movie } from '@/models/movie';
 
 export default function Home() {
@@ -36,30 +37,28 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-8 font-sans">
-      <h1 className="text-2xl font-bold text-center mb-8">Movie Search</h1>
+    <div className="max-w-6xl mx-auto p-8 font-sans">
+      <h1 className="text-3xl font-bold text-center mb-8">Movie Search</h1>
       <form onSubmit={handleSearch} className="flex justify-center mb-8">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search for a movie..."
-          className="w-72 p-2 border border-gray-300 rounded mr-4"
+          className="text-black w-72 p-2 border border-gray-300 rounded mr-4"
         />
-        <button type="submit" className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700">Search</button>
+        <button type="submit" className="p-2 bg-red-600 text-white rounded hover:bg-red-800">Search</button>
       </form>
-      <ul className="list-none p-0">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {movies.slice(0, 10).map((movie) => (
-          <li key={movie.id} className="border-b border-gray-300 py-4">
-            <h2 className="text-xl font-semibold">{movie.title}</h2>
-            <p className="text-gray-600">Release Date: {movie.release_date}</p>
-            <p className="mt-2">{movie.overview}</p>
-            <button onClick={() => toggleOwnership(movie.id)} className={`mt-2 ${ownedMovies.has(movie.id) ? 'text-green-500' : 'text-blue-500'} hover:underline`}>
-              {ownedMovies.has(movie.id) ? 'Unmark as Owned' : 'Mark as Owned'}
-            </button>
-          </li>
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            isOwned={ownedMovies.has(movie.id)}
+            toggleOwnership={toggleOwnership}
+          />
         ))}
-      </ul>
+      </div>
       <div className="flex justify-center mt-8">
         <button
           onClick={() => handlePageChange(page - 1)}
@@ -76,7 +75,7 @@ export default function Home() {
           Next
         </button>
       </div>
-      <p className="text-center mt-4">Total Results: {totalResults}</p>
+      <p className="text-center mt-4 text-white">Total Results: {totalResults}</p>
     </div>
   );
 }
