@@ -17,7 +17,7 @@ const config: Config = {
     "^@/(.*)$": "<rootDir>/$1",
   },
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
+    "^.+\\.(t|j)sx?$": "@swc/jest",
   },
 };
 
