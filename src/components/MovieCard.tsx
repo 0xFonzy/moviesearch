@@ -21,9 +21,7 @@ export default function MovieCard({ movie, isOwned, toggleOwnership }: MovieCard
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
-          layout="fill"
-          objectFit="cover"
-          objectPosition='top'
+          fill
           className="rounded"
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw, (max-width: 1280px) 20vw, 16vw"
         />

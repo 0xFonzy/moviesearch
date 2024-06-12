@@ -5,7 +5,7 @@ import { SearchContext } from '../context/SearchContext';
 import Pagination from './Pagination';
 
 export default function Home() {
-  const { movies, totalResults } = useContext(SearchContext);
+  const { movies, totalResults, searchError } = useContext(SearchContext);
   const [ownedMovies, setOwnedMovies] = useState<Set<number>>(new Set());
 
   const toggleOwnership = (movieId: number) => {
@@ -19,6 +19,8 @@ export default function Home() {
       return updatedOwnedMovies;
     });
   };
+
+  if (searchError) return <div className="text-red-500 text-center">{searchError.message}</div>;
 
   return (
     <div className="flex flex-col justify-between max-w-full mx-auto p-8 font-sans">
