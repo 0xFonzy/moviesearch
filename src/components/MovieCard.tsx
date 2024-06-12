@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { Movie } from '@/models/movie';
 
@@ -8,7 +8,7 @@ type MovieCardProps = {
   toggleOwnership: (movieId: number) => void;
 }
 
-const MovieCard: FC<MovieCardProps> = ({ movie, isOwned, toggleOwnership }) => {
+export default function MovieCard({ movie, isOwned, toggleOwnership }: MovieCardProps) {
   const [hover, setHover] = useState(false);
 
   return (
@@ -17,14 +17,15 @@ const MovieCard: FC<MovieCardProps> = ({ movie, isOwned, toggleOwnership }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="relative w-full h-64">
+      <div className="relative w-full h-96">
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
           layout="fill"
           objectFit="cover"
+          objectPosition='top'
           className="rounded"
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw, (max-width: 1280px) 20vw, 16vw"
         />
       </div>
       {hover && (
@@ -43,5 +44,3 @@ const MovieCard: FC<MovieCardProps> = ({ movie, isOwned, toggleOwnership }) => {
     </div>
   );
 };
-
-export default MovieCard;

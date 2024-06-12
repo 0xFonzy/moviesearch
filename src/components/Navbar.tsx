@@ -9,15 +9,17 @@ export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-black text-white">
-      <div className="text-2xl font-bold">Movie App</div>
-      <form onSubmit={handleSearch} className="relative">
+    <nav className="flex items-center justify-between max-w-full mx-auto p-8">
+      <div className="text-2xl font-bold">
+        <Image src="/logo.png" alt="Logo" height={100} width={200} />
+      </div>
+      <form onSubmit={handleSearch}>
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search for a movie..."
-          className="text-black w-72 p-2 border border-gray-300 rounded"
+          className="w-72 p-2 border border-gray-300 rounded"
         />
         <button type="submit" className="hidden">Search</button>
       </form>
