@@ -10,7 +10,7 @@ import { debounce } from 'lodash';
 export default function Navbar() {
   const { query, setQuery, handleSearch } = useContext(SearchContext);
 
-  const debouncedSearch = useCallback(debounce(handleSearch, 500), []);
+  const debouncedSearch = useCallback(debounce(handleSearch, 300), []);
 
   const handleMovieSearch = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
@@ -33,7 +33,7 @@ export default function Navbar() {
           </Link>
         </NavbarBrand>
       </NavbarContent>
-      <NavbarContent justify='center' className='pr-8'>
+      <NavbarContent justify='center'>
         <Input classNames={{
           base: "max-w-full h-10",
           mainWrapper: "h-full",

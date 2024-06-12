@@ -23,7 +23,7 @@ export default function Home() {
   if (searchError) return <div className="text-red-500 text-center">{searchError.message}</div>;
 
   return (
-    <div className="flex flex-col justify-between max-w-full mx-auto p-8 font-sans">
+    <div className="flex flex-col justify-between h-full max-w-full mx-auto p-8 font-sans">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {movies.slice(0, 10).map((movie) => (
           <MovieCard
