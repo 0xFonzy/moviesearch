@@ -3,21 +3,14 @@ import { useContext, useState } from 'react';
 import MovieCard from '@/components/MovieCard';
 import { SearchContext } from '../context/SearchContext';
 import Pagination from './Pagination';
+import { toggleMovieOwnership } from '@/lib/movies';
 
 export default function Home() {
   const { movies, totalResults, searchError } = useContext(SearchContext);
   const [ownedMovies, setOwnedMovies] = useState<Set<number>>(new Set());
 
   const toggleOwnership = (movieId: number) => {
-    setOwnedMovies((prevOwnedMovies) => {
-      const updatedOwnedMovies = new Set(prevOwnedMovies);
-      if (updatedOwnedMovies.has(movieId)) {
-        updatedOwnedMovies.delete(movieId);
-      } else {
-        updatedOwnedMovies.add(movieId);
-      }
-      return updatedOwnedMovies;
-    });
+    setOwnedMovies((prevOwnedMovies) => toggleMovieOwnership(prevOwnedMovies, movieId));
   };
 
   if (searchError) return <div className="text-red-500 text-center">{searchError.message}</div>;
